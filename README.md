@@ -4,7 +4,7 @@ Gerrit on Rocky Linux:
 - integration Gerrit with Jenkins
 
 ## Requirements
-* Gerrit Plugin
+* Gerrit Trigger Plugin
 
 ## Installation
 
@@ -60,10 +60,12 @@ Integrartion with Jenkins:
       - file permission : .ssh (700)
       - file permission : .ssh/id_rsa (600)
 
+  * Configuration fo Gerrit Trigger in freestylejob
+   * ![image](https://user-images.githubusercontent.com/86531003/205733452-aa003bf0-e661-40f5-8f12-e13d55441817.png)
+
+
 ## Problems:
-
-when using SSH there is problem when adding ssh id_rsa key.
-
+when using SSH there is problem when adding ssh id_rsa key in Jenkins plugin.
 
 ```
 Jsch seems not to support the above private key format, to solve it, we can use ssh-keygen to convert the private key format to the RSA or pem mode, and the above program works again.
