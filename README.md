@@ -68,22 +68,31 @@ Integrartion with Jenkins:
 when using SSH there is problem when adding ssh id_rsa key in Jenkins plugin.
 
 ```
-Jsch seems not to support the above private key format, to solve it, we can use ssh-keygen to convert the private key format to the RSA or pem mode, and the above program works again.
-
+# Jsch seems to have problem with private key, to solve that ssh-keygen have possibility to convert the private key RSA => pem mode.
 $ ssh-keygen -p -f ~/.ssh/id_rsa -m pem
 ```
 
-
 ## Gerrit cheat and sheet
 ```  
+# Create project:
+ssh -p 29418 admin@192.168.0.162 gerrit create-project demo-project --empty-commit
+
+
+# Congiguration:
+git config --global user.email user@gmail.com
+git config --global user.name user
+
+# Clone repository
 git clone ssh://admin@192.168.0.162:29418/demo-project
+
+# Create ChangeId
 gitdir=$(git rev-parse --git-dir); scp -p -P 29418 admin@vm-lnx-gerrit:hooks/commit-msg ${gitdir}/hooks/
 f="$(git rev-parse --git-dir)/hooks/commit-msg"; curl -o "$f" http://vm-lnx-gerrit:8080/tools/hooks/commit-msg ; chmod +x "$f"
+
+# Commit changes
 git commit --amend --no-edit
-git push ssh://admin@192.168.0.162:29418/demo-project HEAD:refs/for/master
-git commit --amend --no-edit
-ssh -p 29418 admin@192.168.0.162 gerrit create-project demo-project --empty-commit
-ssh -p 29418 admin@192.168.0.162:29418 gerrit create-project demo-project123
+
+# Push changes
 git push ssh://admin@192.168.0.162:29418/demo-project HEAD:refs/for/master
  
 ```
