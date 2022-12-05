@@ -1,5 +1,5 @@
-# gerrit
-Gerrit configuration
+# Gerrit configuration
+Gerrit configuration on Rocky Linux
 
 ## Requirements
 * Gerrit Plugin
@@ -37,6 +37,26 @@ cd bin/
 ```
 ssh-keygen -t rsa
 ```
+* Add public key to UI ( Settings -> SSH keys) 
+* Check connection.
+```
+ssh admin@localhost -p 29418
+```
+![image](https://user-images.githubusercontent.com/86531003/205731479-3143f91b-ad0c-4c96-8f33-d7b5174c367c.png)
+
+Integrartion with Jenkins:
+  * Use plugin:Gerrit Plugin
+  * Copy ssh id_rsa from gerrit - and put that in `/var/lib/jenkins/.ssh`
+  * Convert to PEM file :  ssh-keygen -p -f ~/.ssh/id_rsa -m pem - without that there will be problem like describe below.
+  * Configure Gerrit Plugin:
+    * Manage Jenkins -> Gerrit Trigger -> Add New Server
+      ![image](https://user-images.githubusercontent.com/86531003/205732382-52abce1c-0515-44ff-aa97-7d3598e003e1.png)
+    * Setup :
+    ![image](https://user-images.githubusercontent.com/86531003/205732547-71cf907c-6737-4abb-8c3f-11fa07225a95.png)
+    
+    ! rember that file in `/var/lib/jenkins/.ssh/id_rsa` should have ownership like jenkins user:
+      - file permission : .ssh (700)
+      - file permission : .ssh/id_rsa (600)
 
 ## Problems:
 
