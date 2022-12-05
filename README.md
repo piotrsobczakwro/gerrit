@@ -1,5 +1,7 @@
 # Gerrit configuration
-Gerrit configuration on Rocky Linux
+Gerrit on Rocky Linux:
+- installation of Gerrit on Rocky Linux
+- integration Gerrit with Jenkins
 
 ## Requirements
 * Gerrit Plugin
