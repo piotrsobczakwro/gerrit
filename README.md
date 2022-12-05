@@ -72,3 +72,18 @@ Jsch seems not to support the above private key format, to solve it, we can use 
 
 $ ssh-keygen -p -f ~/.ssh/id_rsa -m pem
 ```
+
+
+## Gerrit cheat and sheet
+```  
+git clone ssh://admin@192.168.0.162:29418/demo-project
+gitdir=$(git rev-parse --git-dir); scp -p -P 29418 admin@vm-lnx-gerrit:hooks/commit-msg ${gitdir}/hooks/
+f="$(git rev-parse --git-dir)/hooks/commit-msg"; curl -o "$f" http://vm-lnx-gerrit:8080/tools/hooks/commit-msg ; chmod +x "$f"
+git commit --amend --no-edit
+git push ssh://admin@192.168.0.162:29418/demo-project HEAD:refs/for/master
+git commit --amend --no-edit
+ssh -p 29418 admin@192.168.0.162 gerrit create-project demo-project --empty-commit
+ssh -p 29418 admin@192.168.0.162:29418 gerrit create-project demo-project123
+git push ssh://admin@192.168.0.162:29418/demo-project HEAD:refs/for/master
+ 
+```
