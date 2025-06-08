@@ -103,5 +103,6 @@ git push ssh://admin@192.168.0.162:29418/demo-project HEAD:refs/for/master
 https://gerrit-ci.gerritforge.com/
 
 - Download plugin to folder $gerrit/plugin
-
+```
 wget https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.5/job/plugin-events-log-bazel-master-stable-3.5/lastSuccessfulBuild/artifact/bazel-bin/plugins/events-log/events-log.jar
+```
